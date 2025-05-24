@@ -10,6 +10,7 @@ import (
 	"github.com/arvinpaundra/go-boilerplate/api/route"
 	"github.com/arvinpaundra/go-boilerplate/config"
 	"github.com/arvinpaundra/go-boilerplate/core"
+	"github.com/arvinpaundra/go-boilerplate/core/validator"
 	sqlpkg "github.com/arvinpaundra/go-boilerplate/database"
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/cobra"
@@ -27,7 +28,7 @@ var restCmd = &cobra.Command{
 
 		g := gin.New()
 
-		route.New(g, sqlpkg.GetConnection())
+		route.New(g, sqlpkg.GetConnection(), validator.NewValidator())
 
 		srv := http.Server{
 			Addr:    fmt.Sprintf(":%s", port),
@@ -59,6 +60,6 @@ var restCmd = &cobra.Command{
 }
 
 func init() {
-	restCmd.Flags().StringVarP(&port, "port", "p", ":8080", "bind server to port. default: 8080")
+	restCmd.Flags().StringVarP(&port, "port", "p", "8080", "bind server to port. default: 8080")
 	rootCmd.AddCommand(restCmd)
 }
