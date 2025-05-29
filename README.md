@@ -1,4 +1,2 @@
-# Golang Boilerplate
-
-### Desc soon
+# CENT - User Service
 
